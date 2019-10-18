@@ -1,12 +1,12 @@
 package.path = "script/common/?.lua;script/game/server/?.lua;script/game/handler/?.lua"
-package.cpath = "lualib/?.dll"
+package.cpath = "lualib/?.dll;lualib/?.so"
 
 dofile("script/game/loader.lua")
 
 local skynet = require "skynet"
 local utils = require "utils"
-local GameServer = require "GameServer"
 local co = require "co"
+local GameServer = require "GameServer"
 
 local function handleTextMsg(source, fd, msg)
     local args = utils.split(msg, '|')

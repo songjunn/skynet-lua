@@ -11,6 +11,7 @@ function co.create(func, ...)
 	)
 	sid = sid + 1
 	coroutines[sid] = c
+	skynet.logDebug("[game]coroutine create sid=%d", sid)
 	coroutine.resume(c, ...)
 end
 
@@ -19,7 +20,12 @@ function co.resume(sid, ...)
 	if (c == nil) then
 		skynet.logError("[game]coroutine resume error sid=%d", sid)
 	end
+	skynet.logDebug("[game]coroutine resume sid=%d", sid)
 	coroutine.resume(c, ...)
+	if (coroutine.status(c) == "dead") then
+		coroutines[sid] = nil
+		skynet.logDebug("[game]coroutine delete sid=%d", sid)
+	end
 end
 
 function co.yield(...)
