@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package Message; 
+
+enum MsgDefine {
+    S2C_MSG_BEGIN = 0;              //server message begin
+
+    S2C_COMMON_ERROR = 50;          //错误码
+    S2C_COMMON_NOTICE = 51;         //公告
+    S2C_COMMON_BROADCAST = 52;      //全服广播
+
+    S2C_USER_LOGIN= 100;            //登录验证返回
+    S2C_USER_LOGOUT= 101;           //登录验证返回
+    S2C_USER_HEARTBEAT = 102;       //心跳响应
+    S2C_PLAYER_LOGIN = 103;         //通知角色登录
+    S2C_PLAYER_INFO = 104;          //同步角色属性
+
+    S2C_MSG_END = 9999;             //server message end
+    C2S_MSG_BEGIN = 10000;          //client message begin
+
+    //user & player
+    C2S_USER_LOGIN = 10001;         //请求账号登录
+    C2S_USER_LOGOUT = 10002;        //账号登出
+    C2S_USER_HEARTBEAT = 10003;     //心跳请求
+    C2S_PLAYER_LOGIN = 10004;       //角色登录 
+    C2S_PLAYER_LOGOUT = 10005;      //角色登出
+    
+    C2S_MSG_END = 30000;            //client message end
+}

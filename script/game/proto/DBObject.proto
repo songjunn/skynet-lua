@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package DBObj;
+
+//角色基础信息
+message DBPlayerBase {
+    int64 createtime = 1; //创建时间
+	int64 logouttime = 2; //上次退出时间
+    int64 logintime  = 3; //上次登录时间
+    int32 ranks = 4;      //军衔
+    int32 level = 5;      //段位
+    int32 honor = 6;      //荣耀值
+    int32 action = 7;     //体力值
+    int32 golden = 8;     //金币值
+}
+
+//角色战斗属性
+message DBPlayerFight {
+    string text = 1;
+}
+
+message DBPlayer {
+	int64 userid     	= 1; //账号流水号
+	DBPlayerBase base 	= 2; //账号基础信息
+	DBPlayerFight fight     = 3;
+}

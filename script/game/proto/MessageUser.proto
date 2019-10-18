@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package Message;
+
+//请求账号登录
+message C2SUserLogin {
+    int64  userid   = 1; //账号id
+    string appid    = 2; //appid
+    string ticket   = 3; //登录票据
+    string device   = 4; //设备id
+    string macaddr  = 5; //mac地址
+    string manufacturer = 6; //生产商
+    string model    = 7; //型号
+    string system   = 8; //系统版本号
+}
+
+message S2CUserInfo {
+    int64  userid   = 1; //账号id
+    int32  ranks    = 4; //军衔
+    int32  level    = 5; //段位
+    int32  honor    = 6; //荣耀值
+    int32  action   = 7; //体力值
+    int32  golden   = 8; //金币值
+}
+
+//请求登出
+message C2SUserLogout { 
+    
+}
+
+//心跳请求
+message C2SUserHeartbeat { 
+
+} 
+
+//心跳响应
+message S2CUserHeartbeat { 
+    int64  stime    = 1; //返回时间
+}
