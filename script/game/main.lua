@@ -28,7 +28,7 @@ local function handleTextMsg(source, fd, msg)
 end
 
 local function handleResponseMsg(source, session, msg)
-    skynet.logDebug('[game]handle response msg: source=%d session=%d msg=%s', source, session, message)
+    skynet.logDebug('[game]handle response msg: source=%d session=%d msg=%s', source, session, msg)
     co.resume(session, msg)
 end
 

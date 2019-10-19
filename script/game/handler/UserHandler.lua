@@ -1,5 +1,6 @@
 local skynet = require "skynet"
 local co = require "co"
+local rapidjson = require "rapidjson"
 local UserMgr = require "UserMgr"
 
 local userHandler = {}
@@ -9,16 +10,19 @@ function userHandler.handleC2SUserLogin(sid, fd, message)
 	local user = UserMgr.getUser(uid)
 	if (user == nil) then
 		UserMgr.loadUser(sid, uid)
-		user = co.yield()
+		data = co.yield()
 
-		if (string.len(user) == 0) then
+		if (data == nil) then
 			user = UserMgr.createUser(uid)
 		else
-			skynet.logDebug("load user:%s", user)
+            user = rapidjson.decode(data)
+        end
 	end
 
-
-	skynet.logDebug("user id=%d", message.userid)
+    UserMgr.loginUser(user, fd)
+    UserMgr.sendUserInfo(user)
+    UserMgr.saveUser(user)
+    UserMgr.addUser(user.userid, user)
 end
 
 return userHandler

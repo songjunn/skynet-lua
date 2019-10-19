@@ -64,7 +64,7 @@ end
 
 function skynet.upsertDb(dbname, tablename, query, value)
 	local data = string.format("upsert|%s|%s|%s|%s", dbname, tablename, query, value)
-	skynet.serviceByName("mongo", 0, SERVICE_TEXT, data)
+	skynet.serviceByName("mongo", 0, skynet.SERVICE_TEXT, data)
 end
 
 return skynet

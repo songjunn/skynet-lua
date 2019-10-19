@@ -1,3 +1,5 @@
+local skynet = require "skynet"
+
 local co = {}
 
 local sid = 0
@@ -7,7 +9,10 @@ function co.create(func, ...)
 	sid = sid + 1
 	local c = coroutine.create(
 		function(...)
-			pcall(func, sid, ...)
+			xpcall(func, function(e) 
+                skynet.logDebug(debug.traceback()) 
+                return e 
+            end, sid, ...)
 		end
 	)
 	coroutines[sid] = c
@@ -21,7 +26,9 @@ function co.resume(sid, ...)
 		skynet.logError("[game]coroutine resume error sid=%d", sid)
 	end
 	skynet.logDebug("[game]coroutine resume sid=%d", sid)
+
 	coroutine.resume(c, ...)
+
 	if (coroutine.status(c) == "dead") then
 		coroutines[sid] = nil
 		skynet.logDebug("[game]coroutine delete sid=%d", sid)
