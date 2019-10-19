@@ -1,0 +1,72 @@
+local skynet = require "skynet"
+local pb = require "pb"
+local GameServer = require "GameServer"
+
+local UserMgr = {}
+
+local userlist = {}
+
+function UserMgr.addUser(uid, user)
+	userlist[uid] = user
+end
+
+function UserMgr.removeUser(uid)
+	userlist[uid] = nil
+end
+
+function UserMgr.getUser(uid)
+	return userlist[uid]
+end
+
+function UserMgr.createUser(uid)
+	--[[local user = assert(pb.decode("DBObj.DBPlayer", ""))
+	user.userid = uid
+	user.base.createtime = os.time()]]
+
+	local user = {
+		userid = uid,
+		base = {
+			createtime = os.time(),
+		},
+	}
+
+	skynet.logNotice("[game]User create, userId=%d", uid)
+	return user
+end
+
+function UserMgr.loginUser(user, fd)
+	user.fd = fd
+	user.base.logintime = os.time()
+
+	skynet.logNotice("[game]User login, userId=%d fd=%d", user.userid, user.fd)
+end
+
+function UserMgr.logoutUser(user)
+	user.fd = 0
+	user.base.logouttime = os.time()
+
+	skynet.logNotice("[game]User logout, userId=%d", user.userid)
+end
+
+function UserMgr.loadUser(session, uid)
+
+end
+
+function UserMgr.saveUser(user)
+
+end
+
+function UserMgr.sendUserInfo(user)
+	local message = {
+		userid = user.userid,
+		ranks = user.base.ranks,
+		level = user.base.level,
+		honor = user.base.honor,
+		action = user.base.action,
+		golden = user.base.golden,
+	}
+	local type = pb.enum("Message.MsgDefine", "S2C_USER_LOGIN")
+	GameServer.sendClientMsg(user.fd, type, message)
+end
+
+return UserMgr

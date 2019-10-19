@@ -19,7 +19,7 @@ function Server.shutdown()
 end
 
 function Server.tick()
-	skynet.logDebug("game server tick")
+	--skynet.logDebug("game server tick")
 end
 
 function Server.sendClientMsg(fd, t, mesasge)

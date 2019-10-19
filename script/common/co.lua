@@ -4,12 +4,12 @@ local sid = 0
 local coroutines = setmetatable({}, { __mode = "kv" })
 
 function co.create(func, ...)
+	sid = sid + 1
 	local c = coroutine.create(
 		function(...)
-			pcall(func, ...)
+			pcall(func, sid, ...)
 		end
 	)
-	sid = sid + 1
 	coroutines[sid] = c
 	skynet.logDebug("[game]coroutine create sid=%d", sid)
 	coroutine.resume(c, ...)
