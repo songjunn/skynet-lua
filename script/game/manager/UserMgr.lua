@@ -2,6 +2,7 @@ local skynet = require "skynet"
 local pb = require "pb"
 local GameServer = require "GameServer"
 local rapidjson = require "rapidjson"
+local serpent = require "serpent"
 
 local UserMgr = {}
 
@@ -20,9 +21,9 @@ function UserMgr.getUser(uid)
 end
 
 function UserMgr.createUser(uid)
-	--[[local user = assert(pb.decode("DBObj.DBPlayer", ""))
-	user.userid = uid
-	user.base.createtime = os.time()]]
+	--local user = assert(pb.decode("DBObj.DBPlayer", ""))
+	--user.userid = uid
+	--user.base.createtime = os.time()
 
 	local user = {
 		userid = uid,
@@ -30,9 +31,14 @@ function UserMgr.createUser(uid)
 			createtime = os.time(),
 		},
 	}
-
+    --print(serpent.line(user))
 	skynet.logNotice("[game]User create, userId=%d", uid)
 	return user
+end
+
+function UserMgr.setUser(jsonData)
+    local user = rapidjson.decode(jsonData)
+    return user
 end
 
 function UserMgr.loginUser(user, fd)

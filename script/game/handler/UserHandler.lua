@@ -12,10 +12,10 @@ function userHandler.handleC2SUserLogin(sid, fd, message)
 		UserMgr.loadUser(sid, uid)
 		data = co.yield()
 
-		if (data == nil) then
+		if (string.len(data) == 0) then
 			user = UserMgr.createUser(uid)
 		else
-            user = rapidjson.decode(data)
+            user = UserMgr.setUser(data)
         end
 	end
 
