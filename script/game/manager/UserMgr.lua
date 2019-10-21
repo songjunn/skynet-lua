@@ -17,7 +17,6 @@ function UserMgr.removeUser(uid)
 end
 
 function UserMgr.getUser(uid)
-	skynet.logDebug("UserMgr.getUser44444444444:%d", uid)
 	return userlist[uid]
 end
 

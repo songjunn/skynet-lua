@@ -69,7 +69,6 @@ end
 
 function skynet.responseHttp(target, fd, msg)
 	local data = string.format("response|%d|%s", fd, msg)
-	print(data)
 	skynet.serviceByHandle(target, fd, skynet.SERVICE_TEXT, data)
 end
 
