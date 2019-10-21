@@ -1,5 +1,5 @@
 package.path = "script/common/?.lua;script/game/server/?.lua;script/game/handler/?.lua;script/game/manager/?.lua"
-package.cpath = "lualib/?.so"
+package.cpath = "lualib/?.dll"
 
 dofile("script/game/loader.lua")
 
