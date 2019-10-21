@@ -1,4 +1,4 @@
-package.path = "script/common/?.lua;script/game/server/?.lua;script/game/handler/?.lua;script/game/manager/?.lua"
+package.path = "script/common/?.lua;script/Game/?.lua;script/game/server/?.lua;script/game/handler/?.lua;script/game/manager/?.lua"
 package.cpath = "lualib/?.dll"
 
 dofile("script/game/loader.lua")
@@ -7,6 +7,7 @@ local skynet = require "skynet"
 local utils = require "utils"
 local co = require "co"
 local GameServer = require "GameServer"
+local AdminServer = require "AdminServer"
 
 local function handleTextMsg(source, fd, msg)
     local args = utils.split(msg, '|')
@@ -21,7 +22,7 @@ local function handleTextMsg(source, fd, msg)
     elseif (cmd == "disconnect") then
         skynet.logDebug("[game]disconnected fd=%d", fd)
     elseif (cmd == "http") then
-
+        AdminServer.response(source, fd, data)
     else
         skynet.logError("[game]handle error message. cmd=%s source=%d", cmd, source)
     end

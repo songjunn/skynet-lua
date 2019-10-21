@@ -67,4 +67,10 @@ function skynet.upsertDb(dbname, tablename, query, value)
 	skynet.serviceByName("mongo", 0, skynet.SERVICE_TEXT, data)
 end
 
+function skynet.responseHttp(target, fd, msg)
+	local data = string.format("response|%d|%s", fd, msg)
+	print(data)
+	skynet.serviceByHandle(target, fd, skynet.SERVICE_TEXT, data)
+end
+
 return skynet
