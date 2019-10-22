@@ -70,15 +70,14 @@ end
 
 function UserMgr.sendUserInfo(user)
 	local message = {
-		userid = user.userid,
+		quserid = user.userid,
 		ranks = user.base.ranks,
 		level = user.base.level,
 		honor = user.base.honor,
 		action = user.base.action,
 		golden = user.base.golden,
 	}
-	local type = pb.enum("Message.MsgDefine", "S2C_USER_LOGIN")
-	GameServer.sendClientMsg(user.fd, type, message)
+	GameServer.sendClientMsg(user.fd, message, "S2C_USER_LOGIN", "Message.S2CUserInfo")
 end
 
 return UserMgr

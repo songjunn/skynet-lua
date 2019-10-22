@@ -22,13 +22,15 @@ function Server.tick()
 	--skynet.logDebug("game server tick")
 end
 
-function Server.sendClientMsg(fd, t, mesasge)
-	--local msg = struct.pack('<iis', )
-	--skynet.sendClient(fd, msg)
-	--skynet.logDebug("[game]Send Message %d from %d size %d: %s", t, fd, sz, serpent.line(msg))
+function Server.sendClientMsg(fd, data, type, proto)
+	local t = pb.enum("Message.MsgDefine", type)
+	local msg = assert(pb.encode(proto, data))
+	local message = struct.pack('>is', t, msg)
+	skynet.sendClient(fd, message)
+	skynet.logDebug("[game]Send Message %d from %d: %s", t, fd, serpent.line(data))
 end
 
-function Server.recvClientMsg(fd, message, sz)
+function Server.recvClientMsg(fd, message)
 	local t, data = struct.unpack('>is', message)
 	local func = handlers[t]
 	local proto = protocols[t]
@@ -38,7 +40,7 @@ function Server.recvClientMsg(fd, message, sz)
 	end
 
 	local msg = assert(pb.decode(proto, data))
-	skynet.logDebug("[game]Recv Message %d from %d size %d: %s", t, fd, sz, serpent.line(msg))
+	skynet.logDebug("[game]Recv Message %d from %d: %s", t, fd, serpent.line(msg))
 
 	co.create(func, fd, msg)
 end

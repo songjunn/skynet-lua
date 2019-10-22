@@ -49,8 +49,8 @@ function skynet.serviceByHandle(target, session, type, msg)
 end
 
 function skynet.sendClient(fd, msg)
-	local data = "forward|" + msg
-	skynet.serviceByName("gatews", fd, skynet.SERVICE_TEXT, msg)
+	local data = string.format("forward|%s", msg)
+	skynet.serviceByName("gatews", fd, skynet.SERVICE_TEXT, data)
 end
 
 function skynet.kickClient(fd)
@@ -59,12 +59,12 @@ end
 
 function skynet.queryDb(session, dbname, tablename, query)
 	local data = string.format("findone|%s|%s|%s", dbname, tablename, query)
-	skynet.serviceByName("mongo", session, skynet.SERVICE_TEXT, data)
+	skynet.serviceByName("database", session, skynet.SERVICE_TEXT, data)
 end
 
 function skynet.upsertDb(dbname, tablename, query, value)
 	local data = string.format("upsert|%s|%s|%s|%s", dbname, tablename, query, value)
-	skynet.serviceByName("mongo", 0, skynet.SERVICE_TEXT, data)
+	skynet.serviceByName("database", 0, skynet.SERVICE_TEXT, data)
 end
 
 function skynet.responseHttp(target, fd, msg)
