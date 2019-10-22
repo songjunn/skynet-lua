@@ -1,8 +1,6 @@
 local skynet = require "skynet"
-local pb = require "pb"
 local GameServer = require "GameServer"
 local rapidjson = require "rapidjson"
-local serpent = require "serpent"
 
 local UserMgr = {}
 
@@ -70,7 +68,7 @@ end
 
 function UserMgr.sendUserInfo(user)
 	local message = {
-		quserid = user.userid,
+		userid = user.userid,
 		ranks = user.base.ranks,
 		level = user.base.level,
 		honor = user.base.honor,
