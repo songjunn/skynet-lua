@@ -35,8 +35,9 @@ function Server.recvClientMsg(fd, message)
 	local func = handlers[t]
 	local proto = protocols[t]
 
-	if (type(func) ~= "function" or proto == nil) then
+	if (func == nil or proto == nil) then
 		skynet.logError("[game]recv unregist message, type=%d fd=%d", t, fd)
+		return
 	end
 
 	local msg = assert(pb.decode(proto, data))
