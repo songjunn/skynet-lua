@@ -1,8 +1,6 @@
 local skynet = require "skynet"
 local GameServer = require "GameServer"
 local rapidjson = require "rapidjson"
-local pb = require "pb"
-local serpent = require "serpent"
 local utils = require "utils"
 local DBUser = require "DBUser"
 
