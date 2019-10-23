@@ -1,6 +1,10 @@
 local skynet = require "skynet"
 local GameServer = require "GameServer"
 local rapidjson = require "rapidjson"
+local pb = require "pb"
+local serpent = require "serpent"
+local utils = require "utils"
+local DBUser = require "DBUser"
 
 local UserMgr = {}
 
@@ -19,23 +23,17 @@ function UserMgr.getUser(uid)
 end
 
 function UserMgr.createUser(uid)
-	--local user = assert(pb.decode("DBObj.DBPlayer", ""))
-	--user.userid = uid
-	--user.base.createtime = os.time()
+	local user = utils.schemaTable({}, DBUser)
+	user.userid = uid
+	user.base.createtime = os.time()
 
-	local user = {
-		userid = uid,
-		base = {
-			createtime = os.time(),
-		},
-	}
-    --print(serpent.line(user))
 	skynet.logNotice("[game]User create, userId=%d", uid)
 	return user
 end
 
 function UserMgr.setUser(jsonData)
-    local user = rapidjson.decode(jsonData)
+    local dbuser = rapidjson.decode(jsonData)
+    local user = utils.schemaTable(dbuser, DBUser)
     return user
 end
 
@@ -62,7 +60,8 @@ end
 function UserMgr.saveUser(user)
     local q = {userid = user.userid}
     local query = rapidjson.encode(q)
-    local value = rapidjson.encode(user)
+    local dbuser = utils.schemaTable(user, DBUser)
+    local value = rapidjson.encode(dbuser)
     skynet.upsertDb("skynet-lua", "user", query, value)
 end
 

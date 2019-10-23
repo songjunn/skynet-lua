@@ -7,6 +7,7 @@ local userHandler = {}
 
 function userHandler.handleC2SUserLogin(sid, fd, message)
 	local uid = message.userid
+	--UserMgr.createUser(uid)
 	local user = UserMgr.getUser(uid)
 	if (user == nil) then
 		UserMgr.loadUser(sid, uid)
