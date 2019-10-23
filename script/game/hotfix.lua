@@ -4,7 +4,7 @@ local hotfix = {}
 
 local modules = {
 	--./common
-	"class", "protoc", "serpent", "struct", "utils",
+	"class", "serpent", "struct", "utils",
 
 	--./loader
 	"JsonLoader", "MessageLoader",

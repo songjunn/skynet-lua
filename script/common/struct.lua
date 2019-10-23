@@ -95,7 +95,7 @@ function struct.pack(format, ...)
       end
     elseif opt == 's' then
       table.insert(stream, tostring(table.remove(vars, 1)))
-      table.insert(stream, string.char(0))
+      --table.insert(stream, string.char(0))
     elseif opt == 'c' then
       local n = format:sub(i + 1):match('%d+')
       local length = tonumber(n)

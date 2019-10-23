@@ -75,7 +75,7 @@ function UserMgr.sendUserInfo(user)
 		action = user.base.action,
 		golden = user.base.golden,
 	}
-	GameServer.sendClientMsg(user.fd, message, "S2C_USER_LOGIN", "Message.S2CUserInfo")
+	GameServer.sendClientMsg(user.fd, message, "Message.S2CUserInfo", "S2C_USER_LOGIN")
 end
 
 return UserMgr

@@ -22,10 +22,10 @@ function Server.tick()
 	--skynet.logDebug("game server tick")
 end
 
-function Server.sendClientMsg(fd, data, type, proto)
-	local t = pb.enum("Message.MsgDefine", type)
+function Server.sendClientMsg(fd, data, proto, proto_type)
+	local t = pb.enum("Message.MsgDefine", proto_type)
 	local msg = assert(pb.encode(proto, data))
-	local message = struct.pack('>is', t, msg)
+	local message = struct.pack('<is', t, msg)
 	skynet.sendClient(fd, message)
 	skynet.logDebug("[game]Send Message %d from %d: %s", t, fd, serpent.line(data))
 end
