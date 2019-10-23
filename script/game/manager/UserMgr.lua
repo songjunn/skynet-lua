@@ -24,7 +24,6 @@ function UserMgr.createUser(uid)
 	local user = utils.schemaTable({}, DBUser)
 	user.userid = uid
 	user.base.createtime = os.time()
-
 	skynet.logNotice("[game]User create, userId=%d", uid)
 	return user
 end

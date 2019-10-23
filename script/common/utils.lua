@@ -30,14 +30,18 @@ function Utils.schemaTable(object, schema)
 	local lookup_table = {}
 	local function _copy(object, schema)
 		if type(schema) ~= "table" then
-			return schema
+			return object or schema
 		elseif lookup_table[schema] then
 			return lookup_table[schema]
 		end
 		local new_table = {}
 		lookup_table[schema] = new_table
 		for key, value in pairs(schema) do
-			new_table[key] = _copy(object[key] or {}, value)
+			if object == nil then
+				new_table[key] = _copy(nil, value)
+			else
+				new_table[key] = _copy(object[key], value)
+			end
 		end
 		return setmetatable(new_table, getmetatable(schema))
 	end
