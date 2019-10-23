@@ -17,7 +17,7 @@ function co.create(func, ...)
 	)
 	coroutines[sid] = c
 	skynet.logDebug("[game]coroutine create sid=%d", sid)
-	coroutine.resume(c, ...)
+	co.resume(sid, ...)
 end
 
 function co.resume(sid, ...)
