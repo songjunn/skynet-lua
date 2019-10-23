@@ -42,7 +42,6 @@ end
 
 function skynet.sendClient(fd, msg)
 	local data = string.format("forward|%s", msg)
-	print(string.len(data))
 	skynet_send_string("gatews", handle, fd, skynet.SERVICE_TEXT, data, string.len(data))
 end
 
