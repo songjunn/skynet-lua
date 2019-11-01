@@ -1,6 +1,6 @@
 local skynet = require "skynet"
 local GameServer = require "GameServer"
-local rapidjson = require "rapidjson"
+local json = require "cjson"
 local utils = require "utils"
 local DBUser = require "DBUser"
 
@@ -29,7 +29,7 @@ function UserMgr.createUser(uid)
 end
 
 function UserMgr.setUser(jsonData)
-    local dbuser = rapidjson.decode(jsonData)
+    local dbuser = json.decode(jsonData)
     local user = utils.schemaTable(dbuser, DBUser)
     return user
 end
@@ -50,15 +50,15 @@ end
 
 function UserMgr.loadUser(session, uid)
     local q = {userid= uid}
-    local query = rapidjson.encode(q)
+    local query = json.encode(q)
     skynet.queryDb(session, "skynet-lua", "user", query)
 end
 
 function UserMgr.saveUser(user)
     local q = {userid = user.userid}
-    local query = rapidjson.encode(q)
+    local query = json.encode(q)
     local dbuser = utils.schemaTable(user, DBUser)
-    local value = rapidjson.encode(dbuser)
+    local value = json.encode(dbuser)
     skynet.upsertDb("skynet-lua", "user", query, value)
 end
 

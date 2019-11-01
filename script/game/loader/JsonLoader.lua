@@ -1,4 +1,4 @@
-local rapidjson = require "rapidjson"
+local json = require "cjson"
 local skynet = require "skynet"
 
 local JsonLoader = {}
@@ -14,7 +14,7 @@ local function loader(file)
 	f:close()
 	skynet.logNotice("[game]load json: %s", file)
 
-	local t = rapidjson.decode(str)
+	local t = json.decode(str)
 	return t
 end
 

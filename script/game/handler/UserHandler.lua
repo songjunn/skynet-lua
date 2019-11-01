@@ -1,6 +1,5 @@
 local skynet = require "skynet"
 local co = require "co"
-local rapidjson = require "rapidjson"
 local UserMgr = require "UserMgr"
 
 local userHandler = {}
