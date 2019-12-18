@@ -1,4 +1,5 @@
 local DBUser = {
+    uuid = '', --string, 账号uuid
     userid = 0, --int64, 账号流水号
     base = {
         createtime = 0, --int64, 创建时间

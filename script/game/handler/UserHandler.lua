@@ -4,15 +4,15 @@ local UserMgr = require "UserMgr"
 
 local userHandler = {}
 
-function userHandler.handleC2SUserLogin(sid, fd, message)
-	local uid = message.userid
-	local user = UserMgr.getUser(uid)
+function userHandler.handleC2SGuestLogin(sid, fd, message)
+	local uuid = message.uuid
+	local user = UserMgr.getUserByUuid(uuid)
 	if (user == nil) then
-		UserMgr.loadUser(sid, uid)
+		UserMgr.loadUserByUuid(sid, uuid)
 		data = co.yield()
 
 		if (string.len(data) == 0) then
-			user = UserMgr.createUser(uid)
+			user = UserMgr.createUser(uuid)
 		else
             user = UserMgr.setUser(data)
         end

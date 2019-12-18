@@ -3,10 +3,12 @@ local GameServer = require "GameServer"
 local json = require "cjson"
 local utils = require "utils"
 local DBUser = require "DBUser"
+local GlobalMgr = require "GlobalMgr"
 
 local UserMgr = {}
 
 local userlist = {}
+local uuidlist = {}
 
 function UserMgr.addUser(uid, user)
 	userlist[uid] = user
@@ -20,12 +22,38 @@ function UserMgr.getUser(uid)
 	return userlist[uid]
 end
 
-function UserMgr.createUser(uid)
+function UserMgr.getUserByUuid(uuid)
+	return uuidlist[uuid]
+end
+
+function UserMgr.createUser(uuid)
 	local user = utils.schemaTable({}, DBUser)
+	local uid = GlobalMgr.generateUid()
+	user.uuid = uuid
 	user.userid = uid
 	user.base.createtime = os.time()
-	skynet.logNotice("[game]User create, userId=%d", uid)
+	skynet.logNotice("[game]User create, uuid=%s userId=%d", uuid, uid)
 	return user
+end
+
+function UserMgr.loadUser(session, uid)
+    local q = {userid= uid}
+    local query = json.encode(q)
+    skynet.queryDb(session, "gladiator", "user", query)
+end
+
+function UserMgr.loadUserByUuid(session, uuid)
+    local q = {uuid= uuid}
+    local query = json.encode(q)
+    skynet.queryDb(session, "gladiator", "user", query)
+end
+
+function UserMgr.saveUser(user)
+    local q = {uuid = user.uuid}
+    local query = json.encode(q)
+    local dbuser = utils.schemaTable(user, DBUser)
+    local value = json.encode(dbuser)
+    skynet.upsertDb("gladiator", "user", query, value)
 end
 
 function UserMgr.setUser(jsonData)
@@ -46,20 +74,6 @@ function UserMgr.logoutUser(user)
 	user.base.logouttime = os.time()
 
 	skynet.logNotice("[game]User logout, userId=%d", user.userid)
-end
-
-function UserMgr.loadUser(session, uid)
-    local q = {userid= uid}
-    local query = json.encode(q)
-    skynet.queryDb(session, "skynet-lua", "user", query)
-end
-
-function UserMgr.saveUser(user)
-    local q = {userid = user.userid}
-    local query = json.encode(q)
-    local dbuser = utils.schemaTable(user, DBUser)
-    local value = json.encode(dbuser)
-    skynet.upsertDb("skynet-lua", "user", query, value)
 end
 
 function UserMgr.sendUserInfo(user)

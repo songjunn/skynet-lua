@@ -1,8 +1,10 @@
 
-è
-MessageUser.protoMessage"Ø
-C2SUserLogin
-userid (Ruserid
+‰
+MessageUser.protoMessage"#
+C2SGuestLogin
+uuid (	Ruuid"Ô
+C2SUserLogin
+uuid (	Ruuid
 appid (	Rappid
 ticket (	Rticket
 device (	Rdevice

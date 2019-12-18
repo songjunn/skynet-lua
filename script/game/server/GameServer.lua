@@ -51,4 +51,8 @@ function Server.registMessage(t, proto, func)
 	protocols[t] = proto
 end
 
+function Server.getServerId()
+	return harbor
+end
+
 return Server

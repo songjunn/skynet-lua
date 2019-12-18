@@ -2,9 +2,14 @@ syntax = "proto3";
 
 package Message;
 
+//游客登录
+message C2SGuestLogin {
+    string uuid     = 1; //uuid
+}
+
 //请求账号登录
 message C2SUserLogin {
-    int64  userid   = 1; //账号id
+    string uuid     = 1; //uuid
     string appid    = 2; //appid
     string ticket   = 3; //登录票据
     string device   = 4; //设备id

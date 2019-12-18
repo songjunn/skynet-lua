@@ -8,6 +8,7 @@ local jsonLoader = require "JsonLoader"
 local messageLoader = require "MessageLoader"
 local GameServer = require "GameServer"
 local AdminServer = require "AdminServer"
+local GlobalMgr = require "GlobalMgr"
 
 local function dispatch_text(source, fd, msg)
     local args = utils.split(msg, '|')
@@ -39,6 +40,7 @@ function create(harbor, hid, args)
     jsonLoader.loadAll()
     messageLoader.loadAll()
     GameServer.startup(harbor)
+    GlobalMgr.loadData()
     skynet.logNotice("[game]Game create.")
     return 0
 end

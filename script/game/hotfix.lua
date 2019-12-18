@@ -12,8 +12,11 @@ local modules = {
 	--./server
 	"AdminServer",
 
+	--./schema
+	"DBUser", "DBGloabl",
+
 	--./manager
-	"UserMgr",
+	--"UserMgr", "GloablMgr",
 
 	--./handler
 	"UserHandler",
