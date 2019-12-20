@@ -1,5 +1,5 @@
-local skynet = require "skynet"
 local co = require "co"
+local UserKit = require "UserKit"
 local UserMgr = require "UserMgr"
 
 local userHandler = {}
@@ -8,20 +8,20 @@ function userHandler.handleC2SGuestLogin(sid, fd, message)
 	local uuid = message.uuid
 	local user = UserMgr.getUserByUuid(uuid)
 	if (user == nil) then
-		UserMgr.loadUserByUuid(sid, uuid)
+		UserKit.loadByUuid(sid, uuid)
 		data = co.yield()
 
 		if (string.len(data) == 0) then
-			user = UserMgr.createUser(uuid)
+			user = UserKit.create(uuid)
 		else
-            user = UserMgr.setUser(data)
-        end
+			user = UserKit.setData(data)
+		end
 	end
 
-    UserMgr.loginUser(user, fd)
-    UserMgr.sendUserInfo(user)
-    UserMgr.saveUser(user)
-    UserMgr.addUser(user.userid, user)
+	UserKit.login(user, fd)
+	UserKit.sendUserInfo(user)
+	UserKit.saveDb(user)
+	UserMgr.addUser(user.userid, user)
 end
 
 return userHandler

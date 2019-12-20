@@ -1,0 +1,29 @@
+{
+    "1": {
+        "dropId": 1, 
+        "id": 1, 
+        "name": "吃的", 
+        "remark": "随便", 
+        "stackmax": 1, 
+        "type": 1, 
+        "uselevel": 1
+    }, 
+    "2": {
+        "dropId": 2, 
+        "id": 2, 
+        "name": "喝的", 
+        "remark": "", 
+        "stackmax": 2, 
+        "type": 2, 
+        "uselevel": 2
+    }, 
+    "3": {
+        "dropId": 3, 
+        "id": 3, 
+        "name": "玩的", 
+        "remark": "", 
+        "stackmax": 3, 
+        "type": 3, 
+        "uselevel": 3
+    }
+}

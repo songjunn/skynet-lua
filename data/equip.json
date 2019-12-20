@@ -1,0 +1,23 @@
+{
+    "10": {
+        "id": 10, 
+        "name": "武器", 
+        "quality": 1, 
+        "remark": "随便", 
+        "type": 2
+    }, 
+    "20": {
+        "id": 20, 
+        "name": "衣服", 
+        "quality": 2, 
+        "remark": "", 
+        "type": 2
+    }, 
+    "30": {
+        "id": 30, 
+        "name": "帽子", 
+        "quality": 3, 
+        "remark": "", 
+        "type": 2
+    }
+}

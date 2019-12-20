@@ -11,7 +11,7 @@ local DBGlobalData = {}
 function GlobalMgr.loadData()
     local func = function(session)
         local query = json.encode({})
-        skynet.queryDb(session, "gladiator", "global", query)
+        skynet.queryDb(session, "game", "global", query)
         local data = co.yield()
         if (string.len(data) == 0) then
         	DBGlobalData = utils.schemaTable(DBGlobalData, DBGlobal)
@@ -27,18 +27,20 @@ function GlobalMgr.saveData()
     local query = json.encode({})
     local data = utils.schemaTable(DBGlobalData, DBGlobal)
     local value = json.encode(data)
-    skynet.upsertDb("gladiator", "global", query, value)
+    skynet.upsertDb("game", "global", query, value)
 end
 
 function GlobalMgr.generateUid()
-	DBGlobalData.nextuserid = DBGlobalData.nextuserid + 1
-	GlobalMgr.saveData()
+    local id = DBGlobalData.nextuserid
+	DBGlobalData.nextuserid = id + 1
+	--GlobalMgr.saveData()
 	return DBGlobalData.nextuserid
 end
 
 function GlobalMgr.generateItemId()
-	DBGlobalData.nextitemid = DBGlobalData.nextitemid + 1
-	GlobalMgr.saveData()
+    local id = DBGlobalData.nextitemid
+	DBGlobalData.nextitemid = id + 1
+	--GlobalMgr.saveData()
 	return DBGlobalData.nextitemid
 end
 

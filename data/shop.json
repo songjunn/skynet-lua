@@ -1,6 +1,6 @@
 {
     "2": {
-        "character": "手枪专用子弹15发，售价20金币，容量1；", 
+        "character": "", 
         "icon": "shop/shop_2", 
         "id": 2, 
         "max_support_num": 15, 
@@ -12,7 +12,7 @@
         "type": 1
     }, 
     "3": {
-        "character": "步枪专用子弹15发，售价40金币，容量1；", 
+        "character": "", 
         "icon": "shop/shop_3", 
         "id": 3, 
         "max_support_num": 15, 
@@ -24,7 +24,7 @@
         "type": 1
     }, 
     "4": {
-        "character": "散弹枪专用子弹10发，售价50金币，容量1；", 
+        "character": "", 
         "icon": "shop/shop_4", 
         "id": 4, 
         "max_support_num": 10, 
@@ -36,7 +36,7 @@
         "type": 1
     }, 
     "5": {
-        "character": "狙击枪专用子弹10发，售价40金币，容量1", 
+        "character": "", 
         "icon": "shop/shop_5", 
         "id": 5, 
         "max_support_num": 10, 
@@ -48,7 +48,7 @@
         "type": 1
     }, 
     "6": {
-        "character": "冲锋枪专用子弹20发，售价50金币，容量1；", 
+        "character": "", 
         "icon": "shop/shop_6", 
         "id": 6, 
         "max_support_num": 20, 
@@ -60,7 +60,7 @@
         "type": 1
     }, 
     "7": {
-        "character": "机枪专用子弹25发，售价100金币，容量1；", 
+        "character": "", 
         "icon": "shop/shop_7", 
         "id": 7, 
         "max_support_num": 25, 
@@ -72,7 +72,7 @@
         "type": 1
     }, 
     "5700": {
-        "character": "描述：对低级士兵造成100%的伤害，对高级士兵造成50%的伤害，对指挥官造成20%的伤害。使用间隔：60秒。", 
+        "character": "", 
         "icon": "shop/shop_1", 
         "id": 5700, 
         "max_support_num": 1, 
@@ -84,7 +84,7 @@
         "type": 2
     }, 
     "5800": {
-        "character": "描述：回复20%的生命值。使用间隔：30秒。", 
+        "character": "", 
         "icon": "shop/shop_8", 
         "id": 5800, 
         "max_support_num": 1, 
@@ -96,7 +96,7 @@
         "type": 2
     }, 
     "5801": {
-        "character": "描述：回复50%的生命值。使用间隔：30秒。", 
+        "character": "", 
         "icon": "shop/shop_8", 
         "id": 5801, 
         "max_support_num": 1, 

@@ -26,6 +26,26 @@ function Utils.clone(object)
     return _copy(object)
 end
 
+function Utils.mergeTable(...)
+    local tabs = {...}
+    if not tabs then
+        return {}
+    end
+    local origin = tabs[1]
+    for i = 2,#tabs do
+        if origin then
+            if tabs[i] then
+                for k,v in pairs(tabs[i]) do
+                	origin[k] = v
+                end
+            end
+        else
+            origin = tabs[i]
+        end
+    end
+    return origin
+end
+
 function Utils.schemaTable(object, schema)
 	local lookup_table = {}
 	local function _copy(object, schema)
