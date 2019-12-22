@@ -44,14 +44,50 @@ function UserKit.setData(jsonData)
     return dbuser
 end
 
+local function string2json(key, value)
+    return string.format("\"%s\":\"%s\",", key, value)
+end
+
+local function number2json(key, value)
+    return string.format("\"%s\":%s,", key, value)
+end
+
+local function boolean2json(key, value)
+    value = value == nil and false or value
+    return string.format("\"%s\":%s,", key, tostring(value))
+end
+
+local function table2json(tab)
+    local str = "{"
+    for k, v in pairs(tab) do
+        if type(v) == "string" then
+            str = str .. string2json(k, v)
+        elseif type(v) == "number" then
+            str = str .. number2json(k, v)
+        elseif type(v) == "boolean" then
+            str = str .. boolean2json(k, v)
+        elseif type(v) == "table" then
+            str = str .. table2json(k, v)
+        end
+    end
+    str = string.sub(str, 1, string.len(str) - 1)
+    return str .. "}"
+end
+
 function UserKit.login(user, fd)
     user.fd = fd
     user.base.logintime = os.time()
 
-    local item = ItemMgr.createItem(2)
+    local item = ItemMgr.createItems(1, 3)
+    print(item)
     if (item ~= nil) then
+        print(item.iid)
+        print("item.cfgid="..item.cfgid)
+        print(item.num)
+        item:cost(1)
+        print("item.num="..item.num)
         skynet.logDebug(json.encode(user))
-        skynet.logDebug(json.encode(item))
+        skynet.logDebug(table2json(item))
         ItemMgr.addItem(user, item)
     end
     skynet.logDebug(json.encode(user))

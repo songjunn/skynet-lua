@@ -1,4 +1,4 @@
-package.path = "script/common/?.lua;script/game/?.lua;script/game/server/?.lua;script/game/handler/?.lua;script/game/manager/?.lua;script/game/loader/?.lua;script/game/schema/?.lua;script/game/module/?.lua"
+package.path = "script/common/?.lua;script/game/?.lua;script/game/server/?.lua;script/game/handler/?.lua;script/game/manager/?.lua;script/game/loader/?.lua;script/game/schema/?.lua;script/game/module/?.lua;script/game/entity/?.lua"
 package.cpath = "lualib/?.dll"
 
 local skynet = require "skynet"

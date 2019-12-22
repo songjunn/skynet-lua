@@ -1,8 +1,10 @@
 local skynet = require "skynet"
 local GlobalMgr = require "GlobalMgr"
 local JsonData = require "JsonLoader"
-local ItemKit = require "ItemKit"
-local EquipKit = require "EquipKit"
+--local ItemKit = require "ItemKit"
+--local EquipKit = require "EquipKit"
+local Item = require "Item"
+local Equip = require "Equip"
 
 local ItemMgr = {}
 
@@ -14,12 +16,15 @@ function ItemMgr.createItem(itemCfgId)
 
     local item = nil
     local itemId = GlobalMgr.generateItemId()
-    local itemType = itemCfg.type
+    local itemType = math.ceil(itemCfg.type)
 
+    print('itemType='..itemType)
     if (itemType == 1) then
-        item = ItemKit.create(itemId, itemCfg, 1)
+        --item = ItemKit.create(itemId, itemCfg, 1)
+        item = Item.new(itemCfgId, 1)
     elseif (itemType == 2) then
-        item = EquipKit.create(itemId, itemCfg, 1)
+        --item = EquipKit.create(itemId, itemCfg, 1)
+        item = Equip.new(itemCfgId, 1)
     end
 
     return item
@@ -31,17 +36,19 @@ function ItemMgr.createItems(itemCfgId, num)
         return nil 
     end
 
-    if (itemCfg.stack < num) then
-        return nil
-    end
+    --if (itemCfg.stack < num) then
+    --    return nil
+    --end
 
     local item = nil
     local itemId = GlobalMgr.generateItemId()
-    local itemType = itemCfg.type
+    local itemType = math.ceil(itemCfg.type)
+
+    print('itemType='..itemType)
     if (itemType == 1) then
-        item = ItemKit.create(itemId, itemCfg, num)
+        item = Item.new(itemCfgId, num)
     elseif (itemType == 2) then
-        item = EquipKit.create(itemId, itemCfg, num)
+        item = Equip.new(itemCfgId, num)
     end
 
     return item
