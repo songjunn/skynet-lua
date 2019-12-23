@@ -16,7 +16,7 @@ function GlobalMgr.loadData()
         if (string.len(data) == 0) then
         	DBGlobalData = utils.schemaTable(DBGlobalData, DBGlobal)
         else
-        	DBGlobalData = data
+        	DBGlobalData = json.decode(data)
         end
         skynet.logNotice("[game]GlobalData: %s", json.encode(DBGlobalData))
     end
@@ -31,16 +31,16 @@ function GlobalMgr.saveData()
 end
 
 function GlobalMgr.generateUid()
-    local id = DBGlobalData.nextuserid
+    local id = math.floor(DBGlobalData.nextuserid)
 	DBGlobalData.nextuserid = id + 1
-	--GlobalMgr.saveData()
+	GlobalMgr.saveData()
 	return DBGlobalData.nextuserid
 end
 
 function GlobalMgr.generateItemId()
-    local id = DBGlobalData.nextitemid
+    local id = math.floor(DBGlobalData.nextitemid)
 	DBGlobalData.nextitemid = id + 1
-	--GlobalMgr.saveData()
+	GlobalMgr.saveData()
 	return DBGlobalData.nextitemid
 end
 

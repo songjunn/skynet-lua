@@ -19,23 +19,16 @@ local function loadJson(file)
 	return t
 end
 
-local function loadJsonTo(file, t)
-	local d = loadJson(file)
-	Utils.mergeTable(t, d)
-end
-
 function JsonLoader.getData(type, id)
 	local key = tostring(id)
 	return data[type][key]
 end
 
 function JsonLoader.loadAll()
-	local allItems = {}
-	loadJsonTo("./data/item.json", allItems)
-	loadJsonTo("./data/equip.json", allItems)
-
-	data["item"] = allItems
+	data["item"] = loadJson("./data/item.json")
 	data["shop"] = loadJson("./data/shop.json")
+
+	data["equip_formula"] = loadJson("./data/equip_formula.json")
 	
 	skynet.logNotice("[game]load json data over.")
 end

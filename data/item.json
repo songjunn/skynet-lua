@@ -1,8 +1,10 @@
 {
     "1": {
         "dropId": 1, 
+        "equipFormula": 0, 
         "id": 1, 
         "name": "吃的", 
+        "quality": 1, 
         "remark": "随便", 
         "stackmax": 1, 
         "type": 1, 
@@ -10,8 +12,10 @@
     }, 
     "2": {
         "dropId": 2, 
+        "equipFormula": 0, 
         "id": 2, 
         "name": "喝的", 
+        "quality": 2, 
         "remark": "", 
         "stackmax": 2, 
         "type": 2, 
@@ -19,11 +23,46 @@
     }, 
     "3": {
         "dropId": 3, 
+        "equipFormula": 0, 
         "id": 3, 
         "name": "玩的", 
+        "quality": 3, 
         "remark": "", 
         "stackmax": 3, 
         "type": 3, 
         "uselevel": 3
+    }, 
+    "10": {
+        "dropId": 0, 
+        "equipFormula": 1, 
+        "id": 10, 
+        "name": "武器", 
+        "quality": 1, 
+        "remark": "随便", 
+        "stackmax": 1, 
+        "type": 2, 
+        "uselevel": 1
+    }, 
+    "20": {
+        "dropId": 0, 
+        "equipFormula": 2, 
+        "id": 20, 
+        "name": "衣服", 
+        "quality": 2, 
+        "remark": "", 
+        "stackmax": 1, 
+        "type": 2, 
+        "uselevel": 1
+    }, 
+    "30": {
+        "dropId": 0, 
+        "equipFormula": 3, 
+        "id": 30, 
+        "name": "帽子", 
+        "quality": 3, 
+        "remark": "", 
+        "stackmax": 1, 
+        "type": 2, 
+        "uselevel": 1
     }
 }

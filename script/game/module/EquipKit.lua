@@ -1,10 +1,13 @@
+local class = require "class"
 local skynet = require "skynet"
+local ItemKit = require "ItemKit"
 
-local EquipKit = require "ItemKit"
+local EquipKit = {}
 
-function EquipKit.create(itemId, itemCfg)
-	skynet.logDebug('EquipKit.create itemId=%d', itemId);
-	return nil
+function EquipKit.createItem(itemCfgId)
+	local equip = ItemKit.createItem(itemCfgId, 1)
+	skynet.logDebug('EquipKit.create itemId=%d', itemCfgId);
+	return equip
 end
 
 function EquipKit.upgrade()
