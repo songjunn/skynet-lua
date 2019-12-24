@@ -1,7 +1,13 @@
 local UserMgr = {}
 
-local userlist = {}
+local fdlist = {}
 local uuidlist = {}
+local userlist = {}
+local savelist = {}
+
+function UserMgr.addUserByFd(fd, user)
+	fdlist[fd] = user
+end
 
 function UserMgr.addUser(uid, user)
 	userlist[uid] = user
