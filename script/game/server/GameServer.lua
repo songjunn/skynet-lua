@@ -3,12 +3,14 @@ local struct = require "struct"
 local serpent = require "serpent"
 local co = require "co"
 local pb = require "pb"
+local UserMgr = require "UserMgr"
 
 local Server = {}
 
 local harbor = 0
 local handlers = {}
 local protocols = {}
+local clients = {}
 
 function Server.startup(id)
 	harbor = id
@@ -18,9 +20,26 @@ function Server.shutdown()
 
 end
 
-function Server.tick()
-	--skynet.logDebug("game server tick")
+function Server.tickClient(nowtime)
+	for k, v in pairs(clients) do      
+	    if (nowtime - v.heartbeat > 30) then
+	    	Server.disconnectClient(k)
+	    	skynet.logDebug("[game]Kick client fd=%d", k)
+	    end
+	end  
 end
+
+function Server.connectClient(fd, addr)
+	clients[fd] = {addr = addr, heartbeat = 0}
+	skynet.logDebug("[game]Connect client fd=%d addr=%s", fd, addr)
+end
+
+function Server.disconnectClient(fd)
+	clients[fd] = nil
+	skynet.logDebug("[game]Disconnect client fd=%d", fd)
+end
+
+function Server.kick
 
 function Server.sendClientMsg(fd, data, proto, proto_type)
 	local t = pb.enum("Message.MsgDefine", proto_type)
@@ -53,6 +72,17 @@ end
 
 function Server.getServerId()
 	return harbor
+end
+
+function Server.getClient(fd)
+	return clients[fd]
+end
+
+function Server.setClientHeart(fd)
+	local c = clients[fd]
+	if (c ~= nil) then
+		c.heartbeat = os.time()
+	end
 end
 
 return Server

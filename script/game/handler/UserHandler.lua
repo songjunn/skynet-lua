@@ -21,7 +21,7 @@ function userHandler.handleC2SGuestLogin(sid, fd, message)
 	UserKit.login(user, fd)
 	UserKit.sendUserInfo(user)
 	UserKit.saveDb(user)
-	UserMgr.addUser(user.userid, user)
+	UserMgr.addUser(user)
 end
 
 return userHandler

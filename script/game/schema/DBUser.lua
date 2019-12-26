@@ -1,4 +1,5 @@
 local DBUser = {
+    fd = 0, --socket
     uuid = '', --string, 账号uuid
     userid = 0, --int64, 账号流水号
     base = {

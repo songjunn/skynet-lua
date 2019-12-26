@@ -19,9 +19,9 @@ local function dispatch_text(source, fd, msg)
     if (cmd == "forward") then
         GameServer.recvClientMsg(fd, data)
     elseif (cmd == "connect") then
-        skynet.logDebug("[game]connected fd=%d addr=%s", fd, data)
+        GameServer.connectClient(fd, data)
     elseif (cmd == "disconnect") then
-        skynet.logDebug("[game]disconnected fd=%d", fd)
+        GameServer.disconnectClient(fd)
     elseif (cmd == "http") then
         AdminServer.response(source, fd, data)
     else
@@ -32,6 +32,26 @@ end
 local function dispatch_response(source, session, msg)
     skynet.logDebug('[game]handle response msg: source=%d session=%d msg=%s', source, session, msg)
     co.resume(session, msg)
+end
+
+local function tick()
+    local nowtime = os.time()
+end
+
+local function tickSec(nowtime)
+    GameServer.tickClient(nowtime)
+end
+
+local function tickMin(nowtime)
+    
+end
+
+local function tickHour(nowtime)
+    
+end
+
+local function tickDay(nowtime)
+    
 end
 
 function create(harbor, hid, args)
@@ -54,7 +74,7 @@ function handle(hid, source, session, type, msg)
     if (type == skynet.SERVICE_TEXT) then
     	dispatch_text(source, session, msg)
     elseif (type == skynet.SERVICE_TIMER) then
-    	GameServer.tick()
+    	tick()
     	skynet.setTimer(1000)
     elseif (type == skynet.SERVICE_RESPONSE) then
     	dispatch_response(source, session, msg)
