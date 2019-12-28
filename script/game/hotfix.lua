@@ -16,7 +16,9 @@ local modules = {
 	"DBUser", "DBGloabl",
 
 	--./manager
-	--"UserMgr", "GloablMgr",
+
+	--./module
+	"CmdKit", "UserKit", "ItemKit", "EquipKit",
 
 	--./handler
 	"UserHandler",

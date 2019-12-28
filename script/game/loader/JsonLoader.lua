@@ -27,8 +27,7 @@ end
 function JsonLoader.loadAll()
 	data["item"] = loadJson("./data/item.json")
 	data["shop"] = loadJson("./data/shop.json")
-
-	data["equip_formula"] = loadJson("./data/equip_formula.json")
+	data["equip"] = loadJson("./data/equip.json")
 	
 	skynet.logNotice("[game]load json data over.")
 end

@@ -30,6 +30,14 @@ function GlobalMgr.saveData()
     skynet.upsertDb("game", "global", query, value)
 end
 
+function GlobalMgr.getTickDay()
+    return DBGlobalData.tickday
+end
+
+function GlobalMgr.setTickDay(d)
+    DBGlobalData.tickday = d
+end
+
 function GlobalMgr.generateUid()
     local id = math.floor(DBGlobalData.nextuserid)
 	DBGlobalData.nextuserid = id + 1

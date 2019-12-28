@@ -2,7 +2,7 @@ local skynet = require "skynet"
 local json = require "cjson"
 local utils = require "utils"
 local DBUser = require "DBUser"
-local GameServer = require "GameServer"
+local Server = require "server"
 local GlobalMgr = require "GlobalMgr"
 local ItemKit = require "ItemKit"
 local EquipKit = require "EquipKit"
@@ -75,7 +75,7 @@ function UserKit.sendUserInfo(user)
         action = user.base.action,
         golden = user.base.golden,
     }
-    GameServer.sendClientMsg(user.fd, message, "Message.S2CUserInfo", "S2C_USER_LOGIN")
+    Server.sendClientMsg(user.fd, message, "Message.S2CUserInfo", "S2C_USER_LOGIN")
 end
 
 return UserKit

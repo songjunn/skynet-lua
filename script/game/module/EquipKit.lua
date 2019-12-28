@@ -1,4 +1,3 @@
-local class = require "class"
 local skynet = require "skynet"
 local ItemKit = require "ItemKit"
 

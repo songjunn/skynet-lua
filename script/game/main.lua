@@ -1,14 +1,56 @@
-package.path = "script/common/?.lua;script/game/?.lua;script/game/server/?.lua;script/game/handler/?.lua;script/game/manager/?.lua;script/game/loader/?.lua;script/game/schema/?.lua;script/game/module/?.lua"
+package.path = "script/common/?.lua;script/game/?.lua;script/game/loader/?.lua;script/game/manager/?.lua;script/game/schema/?.lua;script/game/module/?.lua;script/game/handler/?.lua"
 package.cpath = "lualib/?.dll"
 
-local skynet = require "skynet"
-local utils = require "utils"
 local co = require "co"
+local utils = require "utils"
+local skynet = require "skynet"
+local Server = require "server"
 local jsonLoader = require "JsonLoader"
 local messageLoader = require "MessageLoader"
-local GameServer = require "GameServer"
-local AdminServer = require "AdminServer"
 local GlobalMgr = require "GlobalMgr"
+local ClientMgr = require "ClientMgr"
+local CmdKit = require "CmdKit"
+
+local lastTickSec_ = -1
+local lastTickMin_ = -1
+
+local function tickSec(nowtime)
+
+end
+
+local function tickMin(nowtime)
+    ClientMgr.tickClient(nowtime)
+end
+
+local function tickDay(nowtime)
+
+end
+
+local function tickWeek(nowtime)
+
+end
+
+local function tick()
+    local nowtime = os.time()
+    local time = os.date("*t", nowtime)
+    
+    if (time.sec ~= lastTickSec_) then
+        tickSec(nowtime)
+        lastTickSec_ = time.sec
+    end
+    if (time.min ~= lastTickMin_) then
+        tickMin(nowtime)
+        lastTickMin_ = time.min
+    end
+    if (time.wday ~= GlobalMgr.getTickDay()) then
+        tickDay(nowtime)
+        GlobalMgr.setTickDay(time.wday)
+
+        if (time.wday == 2) then --星期一
+            tickWeek(nowtime)
+        end
+    end
+end
 
 local function dispatch_text(source, fd, msg)
     local args = utils.split(msg, '|')
@@ -17,13 +59,13 @@ local function dispatch_text(source, fd, msg)
     local data = args[3]
     
     if (cmd == "forward") then
-        GameServer.recvClientMsg(fd, data)
+        Server.recvClientMsg(fd, data)
     elseif (cmd == "connect") then
-        GameServer.connectClient(fd, data)
+        ClientMgr.connectClient(fd, data)
     elseif (cmd == "disconnect") then
-        GameServer.disconnectClient(fd)
+        ClientMgr.disconnectClient(fd)
     elseif (cmd == "http") then
-        AdminServer.response(source, fd, data)
+        CmdKit.response(source, fd, data)
     else
         skynet.logError("[game]handle error message. cmd=%s source=%d", cmd, source)
     end
@@ -34,39 +76,19 @@ local function dispatch_response(source, session, msg)
     co.resume(session, msg)
 end
 
-local function tick()
-    local nowtime = os.time()
-end
-
-local function tickSec(nowtime)
-    GameServer.tickClient(nowtime)
-end
-
-local function tickMin(nowtime)
-    
-end
-
-local function tickHour(nowtime)
-    
-end
-
-local function tickDay(nowtime)
-    
-end
-
 function create(harbor, hid, args)
     skynet.setHandle(hid)
     skynet.setTimer(1000)
     jsonLoader.loadAll()
     messageLoader.loadAll()
-    GameServer.startup(harbor)
+    Server.startup(harbor)
     GlobalMgr.loadData()
     skynet.logNotice("[game]Game create.")
     return 0
 end
 
 function release()
-	GameServer.shutdown()
+    Server.shutdown()
     skynet.logNotice("[game]Game release.")
 end
 
@@ -75,7 +97,7 @@ function handle(hid, source, session, type, msg)
     	dispatch_text(source, session, msg)
     elseif (type == skynet.SERVICE_TIMER) then
     	tick()
-    	skynet.setTimer(1000)
+    	skynet.setTimer(10)
     elseif (type == skynet.SERVICE_RESPONSE) then
     	dispatch_response(source, session, msg)
     else

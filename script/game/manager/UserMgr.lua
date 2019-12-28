@@ -7,7 +7,7 @@ local savelist = {}
 
 function UserMgr.addUser(user)
 	local fd = user.fd
-	local uid = user.uid
+	local uid = user.userid
 	fdlist[fd] = user
 	userlist[uid] = user
 end
@@ -15,7 +15,7 @@ end
 function UserMgr.removeUser(fd)
 	local user = fdlist[fd]
 	if (user ~= nil) then
-		local uid = user.uid
+		local uid = user.userid
 		local uuid = user.uuid
 		fdlist[fd] = nil
 		userlist[uid] = nil
