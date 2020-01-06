@@ -1,5 +1,5 @@
 local skynet = require "skynet"
-local json = require "rapidjson"
+local json = require "dkjson"
 local utils = require "utils"
 local DBUser = require "DBUser"
 local Server = require "server"

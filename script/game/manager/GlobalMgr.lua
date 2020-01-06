@@ -1,6 +1,6 @@
 local skynet = require "skynet"
 local utils = require "utils"
-local json = require "rapidjson"
+local json = require "dkjson"
 local co = require "co"
 local DBGlobal = require "DBGlobal"
 
