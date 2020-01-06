@@ -1,0 +1,1 @@
+./shell/shutdown.sh skynet
