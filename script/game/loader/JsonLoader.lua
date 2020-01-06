@@ -1,6 +1,5 @@
-local json = require "cjson"
+local json = require "rapidjson"
 local skynet = require "skynet"
-local Utils = require "Utils"
 
 local JsonLoader = {}
 
