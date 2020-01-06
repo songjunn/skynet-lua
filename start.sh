@@ -1,2 +1,2 @@
 rm -rf nohup.out
-./shell/start.sh skynet conf/game.conf
+./shell/start.sh skynet game.conf
