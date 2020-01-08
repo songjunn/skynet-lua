@@ -32,21 +32,23 @@ end
 
 local function tick()
     local nowtime = os.time()
-    local time = os.date("*t", nowtime)
+    local nowsec = os.date("%S", nowtime)
+    local nowmin = os.date("%M", nowtime)
+    local nowwday = os.date("%w", nowtime)
     
-    if (time.sec ~= lastTickSec_) then
+    if (nowsec ~= lastTickSec_) then
         tickSec(nowtime)
-        lastTickSec_ = time.sec
+        lastTickSec_ = nowsec
     end
-    if (time.min ~= lastTickMin_) then
+    if (nowmin ~= lastTickMin_) then
         tickMin(nowtime)
-        lastTickMin_ = time.min
+        lastTickMin_ = nowmin
     end
-    if (time.wday ~= GlobalMgr.getTickDay()) then
+    if (nowwday ~= GlobalMgr.getTickDay()) then
         tickDay(nowtime)
-        GlobalMgr.setTickDay(time.wday)
+        GlobalMgr.setTickDay(nowwday)
 
-        if (time.wday == 2) then --星期一
+        if (nowwday == 1) then --星期一
             tickWeek(nowtime)
         end
     end
