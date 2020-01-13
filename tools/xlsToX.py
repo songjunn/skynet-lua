@@ -4,8 +4,8 @@
 import xlrd, re, json, os, codecs, sys
 from collections import OrderedDict
 
-sourcePath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../config"))
-jsonPath = os.path.abspath(os.path.join(os.path.dirname(__file__),"../data"))
+sourcePath = sys.argv[1]
+jsonPath = sys.argv[2]
 
 print (sourcePath)
 
