@@ -26,16 +26,11 @@ function JsonLoader.getData(type, id)
 end
 
 function JsonLoader.loadAll()
-	--data["item"] = loadJson("./data/item.json")
-	--data["shop"] = loadJson("./data/shop.json")
-	--data["equip"] = loadJson("./data/equip.json")
-	skynet.logNotice("[game]load start")
-	data["stage"] = loadJson("./data/honorwar_stage.json")
-	--data["wave"] = loadJson("./data/honorwar_stage_wave.json")
-	--data["unit"] = loadJson("./data/honorwar_unit.json")
+	data["item"] = loadJson("./data/item.json")
+	data["shop"] = loadJson("./data/shop.json")
+	data["equip"] = loadJson("./data/equip.json")
 	
 	skynet.logNotice("[game]load json data over.")
-	collectgarbage("collect")
 end
 
 return JsonLoader
