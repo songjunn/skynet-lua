@@ -1,4 +1,4 @@
-local json = require "cjson"
+local json = require "dkjson"
 local skynet = require "skynet"
 
 local JsonLoader = {}
