@@ -1,4 +1,4 @@
-local json = require "dkjson"
+local json = require "cjson"
 local skynet = require "skynet"
 
 local JsonLoader = {}
@@ -6,11 +6,13 @@ local JsonLoader = {}
 local data = {}
 
 local function loadJson(file)
-	local str = ""
+	local lns = {}
 	local f = io.open(file, "r")
 	for line in f:lines() do
-		str = str .. line
+		table.insert(lns, line)
 	end
+	local str = table.concat(lns)
+
 	f:close()
 	skynet.logNotice("[game]load json: %s", file)
 
@@ -24,11 +26,16 @@ function JsonLoader.getData(type, id)
 end
 
 function JsonLoader.loadAll()
-	data["item"] = loadJson("./data/item.json")
-	data["shop"] = loadJson("./data/shop.json")
-	data["equip"] = loadJson("./data/equip.json")
+	--data["item"] = loadJson("./data/item.json")
+	--data["shop"] = loadJson("./data/shop.json")
+	--data["equip"] = loadJson("./data/equip.json")
+	skynet.logNotice("[game]load start")
+	data["stage"] = loadJson("./data/honorwar_stage.json")
+	--data["wave"] = loadJson("./data/honorwar_stage_wave.json")
+	--data["unit"] = loadJson("./data/honorwar_unit.json")
 	
 	skynet.logNotice("[game]load json data over.")
+	collectgarbage("collect")
 end
 
 return JsonLoader

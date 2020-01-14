@@ -1,5 +1,5 @@
 package.path = "script/common/?.lua;script/game/?.lua;script/game/loader/?.lua;script/game/manager/?.lua;script/game/schema/?.lua;script/game/module/?.lua;script/game/handler/?.lua"
-package.cpath = "lualib/?.so"
+package.cpath = "lualib/?.dll"
 
 local co = require "co"
 local utils = require "utils"
