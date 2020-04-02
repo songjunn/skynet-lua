@@ -6,11 +6,13 @@ local JsonLoader = {}
 local data = {}
 
 local function loadJson(file)
-	local str = ""
+	local lns = {}
 	local f = io.open(file, "r")
 	for line in f:lines() do
-		str = str .. line
+		table.insert(lns, line)
 	end
+	local str = table.concat(lns)
+
 	f:close()
 	skynet.logNotice("[game]load json: %s", file)
 
