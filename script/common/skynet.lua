@@ -50,6 +50,11 @@ function skynet.kickClient(fd)
 	skynet_send_string("gatews", handle, fd, skynet.SERVICE_TEXT, data, string.len(data))
 end
 
+function skynet.selectDb(session, dbname, tablename, query)
+	local data = string.format("findmore|%s|%s|%s", dbname, tablename, query)
+	skynet_send_string("database", handle, session, skynet.SERVICE_TEXT, data, string.len(data))
+end
+
 function skynet.queryDb(session, dbname, tablename, query)
 	local data = string.format("findone|%s|%s|%s", dbname, tablename, query)
 	skynet_send_string("database", handle, session, skynet.SERVICE_TEXT, data, string.len(data))
