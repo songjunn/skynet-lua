@@ -61,7 +61,7 @@ function skynet.queryDb(session, dbname, tablename, query)
 end
 
 function skynet.upsertDb(dbname, tablename, query, value)
-	local data = string.format("upsert|%s|%s|%s|%s", dbname, tablename, query, value, string.len(data))
+	local data = string.format("upsert|%s|%s|%s|%s", dbname, tablename, query, value)
 	skynet_send_string("database", handle, 0, skynet.SERVICE_TEXT, data, string.len(data))
 end
 
