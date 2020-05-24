@@ -58,7 +58,7 @@ local function dispatch_text(source, fd, msg)
     local args = utils.split(msg, '|')
     local cmd = args[1]
     local size = args[2]
-    local data = args[3]
+    local data = string.sub(msg, -size)
     
     if (cmd == "forward") then
         Server.recvClientMsg(fd, data)
