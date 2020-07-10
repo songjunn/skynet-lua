@@ -219,7 +219,11 @@ local function addpair (key, value, prev, indent, level, buffer, buflen, tables,
   if indent then
     buflen = addnewline2 (level, buffer, buflen)
   end
-  buffer[buflen+1] = quotestring (key)
+  if kt == 'string' then
+    buffer[buflen+1] = quotestring (key)
+  else
+    buffer[buflen+1] = key
+  end
   buffer[buflen+2] = ":"
   return encode2 (value, indent, level, buffer, buflen + 2, tables, globalorder, state)
 end
