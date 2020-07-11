@@ -11,7 +11,7 @@ function userHandler.handleC2SGuestLogin(sid, fd, message)
 		UserKit.loadByUuid(sid, uuid)
 		data = co.yield()
 
-		if (string.len(data) == 0) then
+		if (#data == 0) then
 			user = UserKit.create(uuid)
 		else
 			user = UserKit.setData(data)

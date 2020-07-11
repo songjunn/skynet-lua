@@ -42,32 +42,32 @@ end
 
 function skynet.sendClient(fd, msg)
 	local data = string.format("forward|%s", msg)
-	skynet_send_string("gatews", handle, fd, skynet.SERVICE_TEXT, data, string.len(data))
+	skynet_send_string("gatews", handle, fd, skynet.SERVICE_TEXT, data, #data)
 end
 
 function skynet.kickClient(fd)
 	local data = "kick"
-	skynet_send_string("gatews", handle, fd, skynet.SERVICE_TEXT, data, string.len(data))
+	skynet_send_string("gatews", handle, fd, skynet.SERVICE_TEXT, data, #data)
 end
 
 function skynet.selectDb(session, dbname, tablename, query)
 	local data = string.format("findmore|%s|%s|%s", dbname, tablename, query)
-	skynet_send_string("database", handle, session, skynet.SERVICE_TEXT, data, string.len(data))
+	skynet_send_string("database", handle, session, skynet.SERVICE_TEXT, data, #data)
 end
 
 function skynet.queryDb(session, dbname, tablename, query)
 	local data = string.format("findone|%s|%s|%s", dbname, tablename, query)
-	skynet_send_string("database", handle, session, skynet.SERVICE_TEXT, data, string.len(data))
+	skynet_send_string("database", handle, session, skynet.SERVICE_TEXT, data, #data)
 end
 
 function skynet.upsertDb(dbname, tablename, query, value)
 	local data = string.format("upsert|%s|%s|%s|%s", dbname, tablename, query, value)
-	skynet_send_string("database", handle, 0, skynet.SERVICE_TEXT, data, string.len(data))
+	skynet_send_string("database", handle, 0, skynet.SERVICE_TEXT, data, #data)
 end
 
 function skynet.responseHttp(target, fd, msg)
 	local data = string.format("response|%d|%s", fd, msg)
-	skynet_send_string(target, handle, fd, skynet.SERVICE_TEXT, data, string.len(data))
+	skynet_send_string(target, handle, fd, skynet.SERVICE_TEXT, data, #data)
 end
 
 return skynet

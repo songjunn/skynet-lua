@@ -13,7 +13,7 @@ function GlobalMgr.loadData()
         local query = json.encode({})
         skynet.queryDb(session, "game", "global", query)
         local data = co.yield()
-        if (string.len(data) == 0) then
+        if (#data == 0) then
         	DBGlobalData = utils.schemaTable(DBGlobalData, DBGlobal)
         else
         	DBGlobalData = json.decode(data)

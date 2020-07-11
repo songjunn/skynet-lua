@@ -20,14 +20,16 @@ end
 
 function Server.sendClientMsg(fd, data, proto, proto_type)
 	local t = pb.enum("Message.MsgDefine", proto_type)
-	local msg = assert(pb.encode(proto, data))
-	local message = struct.pack('<is', t, msg)
+	local m = assert(pb.encode(proto, data))
+	local f = '<ic'..#m
+	local message = struct.pack('<is', t, m)
 	skynet.sendClient(fd, message)
 	skynet.logDebug("[game]Send Message %d from %d: %s", t, fd, serpent.line(data))
 end
 
-function Server.recvClientMsg(fd, message)
-	local t, data = struct.unpack('>is', message)
+function Server.recvClientMsg(fd, message, size)
+	local f = '>ic'..(size-4)
+	local t, data = struct.unpack(f, message)
 	local func = handlers[t]
 	local proto = protocols[t]
 

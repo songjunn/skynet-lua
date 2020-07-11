@@ -7,7 +7,7 @@ local messageLoader = require "MessageLoader"
 local CmdKit = {}
 
 local function build_response(data)
-	return string.format("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length:%d\r\nConnection: keep-alive\r\n\r\n%s", string.len(data), data)
+	return string.format("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length:%d\r\nConnection: keep-alive\r\n\r\n%s", #data, data)
 end
 
 function CmdKit.response(source, fd, url)

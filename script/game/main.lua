@@ -61,7 +61,7 @@ local function dispatch_text(source, fd, msg)
     local data = string.sub(msg, -size)
     
     if (cmd == "forward") then
-        Server.recvClientMsg(fd, data)
+        Server.recvClientMsg(fd, data, size)
     elseif (cmd == "connect") then
         ClientMgr.connectClient(fd, data)
     elseif (cmd == "disconnect") then
