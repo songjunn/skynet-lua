@@ -1,4 +1,5 @@
 local skynet = require "skynet"
+local hotfixlib = require "hotfixlib"
 
 local hotfix = {}
 
@@ -10,10 +11,9 @@ local modules = {
 	"JsonLoader", "MessageLoader",
 
 	--./server
-	"AdminServer",
 
 	--./schema
-	"DBUser", "DBGloabl",
+	"DBUser", "DBGlobal",
 
 	--./manager
 
@@ -26,10 +26,7 @@ local modules = {
 
 function hotfix.reloadAll()
 	for i = 1, #modules do
-		package.loaded[modules[i]] = nil
-	end
-	for i = 1, #modules do
-		require(modules[i])
+		hotfixlib.hotfix_module(modules[i])
 	end
 	skynet.logNotice("[game]reload modules over.")
 end
