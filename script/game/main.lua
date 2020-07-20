@@ -15,7 +15,17 @@ local lastTickSec_ = -1
 local lastTickMin_ = -1
 
 local function tickSec(nowtime)
-
+    skynet.logDebug("Test lua memory leak, nowtime=%d, name=%s", nowtime, "11111111")
+    skynet.logDebug("Test lua memory leak, nowtime=%d, name=%s", nowtime, "22222222")
+    skynet.logDebug("Test lua memory leak, nowtime=%d, name=%s", nowtime, "33333333")
+    skynet.logDebug("Test lua memory leak, nowtime=%d, name=%s", nowtime, "44444444")
+    skynet.logDebug("Test lua memory leak, nowtime=%d, name=%s", nowtime, "55555555")
+    skynet.logDebug("Test lua memory leak, nowtime=%d, name=%s", nowtime, "66666666")
+    skynet.logDebug("Test lua memory leak, nowtime=%d, name=%s", nowtime, "77777777")
+    skynet.logDebug("Test lua memory leak, nowtime=%d, name=%s", nowtime, "88888888")
+    skynet.logDebug("Test lua memory leak, nowtime=%d, name=%s", nowtime, "99999999")
+    skynet.logDebug("Test lua memory leak, nowtime=%d, name=%s", nowtime, "00000000")
+    
 end
 
 local function tickMin(nowtime)

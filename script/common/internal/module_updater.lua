@@ -93,7 +93,6 @@ function update_table(new_table, old_table, name, deep)
     if protected[old_table] then return end
     if check_updated(new_table, old_table, name, deep) then return end
     deep = deep .. "  "
-
     -- Compare 2 tables, and update old table.
     for key, value in pairs(new_table) do
         local old_value = old_table[key]
@@ -106,6 +105,8 @@ function update_table(new_table, old_table, name, deep)
             update_func(value, old_value, key, deep)
         elseif type_value == "table" then
             update_table(value, old_value, key, deep)
+        else
+            old_table[key] = value
         end
     end  -- for
 

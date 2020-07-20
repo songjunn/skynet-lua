@@ -36,7 +36,6 @@ local function hotfix_module_with_obj(module_name, module_obj)
     assert("string" == type(module_name))
     add_self_to_protect()
     module_updater.log_debug = M.log_debug
-
     -- Step 1: Update package.loaded[module_name], recording updated functions.
     local updated_function_map = module_updater.update_loaded_module(
         module_name, protected, module_obj)
