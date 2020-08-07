@@ -3,7 +3,7 @@ local skynet = require "skynet"
 local co = {}
 
 local sid = 0
-local coroutines = setmetatable({}, { __mode = "kv" })
+local coroutines = {}
 
 function co.create(func, ...)
 	sid = sid + 1
