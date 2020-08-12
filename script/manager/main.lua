@@ -19,6 +19,9 @@ local function dispatch_httprequest(source, fd, url)
     if (route == "/gm/serviceclose") then
         local name = arglist
         skynet.closeServiceByName(name)
+    elseif (route == "/gm/servicecreate") then
+        local a = utils.split(arglist, ',')
+        skynet.createService(a[1], a[2], a[3])
     end
 
     local data = build_response("success")
