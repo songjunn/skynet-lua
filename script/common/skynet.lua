@@ -16,6 +16,20 @@ function skynet.getHandle()
 	return handle
 end
 
+function skynet.createService(name, lib, args)
+	return skynet_create_service(name, lib, args)
+end
+
+function skynet.closeService(sid)
+	skynet.logDebug("closeService: %d", sid)
+	skynet_close_service(sid)
+end
+
+function skynet.closeServiceByName(name)
+	skynet.logDebug("closeService: %s", name)
+	skynet_close_service(name)
+end
+
 function skynet.setTimer(delay)
 	skynet_timer_register(handle, "", delay)
 end
@@ -72,6 +86,10 @@ function skynet.responseHttp(target, fd, msg)
 	local data = {"response|", fd, "|", msg}
 	local message = table.concat(data)
 	skynet_send_string(target, handle, fd, skynet.SERVICE_TEXT, message, #message)
+end
+
+function skynet.sendMessage(target, message, session)
+	skynet_send_string(target, handle, session, skynet.SERVICE_TEXT, message, #message)
 end
 
 return skynet

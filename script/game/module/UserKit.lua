@@ -22,13 +22,13 @@ end
 function UserKit.load(session, uid)
     local q = {userid = uid}
     local query = json.encode(q)
-    skynet.queryDb(session, "game", "user", query)
+    skynet.queryDb(session, "game", "user", query, "")
 end
 
 function UserKit.loadByUuid(session, uuid)
     local q = {uuid = uuid}
     local query = json.encode(q)
-    skynet.queryDb(session, "game", "user", query)
+    skynet.queryDb(session, "game", "user", query, "")
 end
 
 function UserKit.saveDb(user)
