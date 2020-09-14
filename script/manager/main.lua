@@ -22,6 +22,8 @@ local function dispatch_httprequest(source, fd, url)
     elseif (route == "/gm/servicecreate") then
         local a = utils.split(arglist, ',')
         skynet.createService(a[1], a[2], a[3])
+    elseif (route == "/gm/printmemory") then
+        skynet_print_memory()
     end
 
     local data = build_response("success")
