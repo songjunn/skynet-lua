@@ -43,9 +43,25 @@ local function dispatch_text(source, fd, msg)
     end
 end
 
+function run(n)
+    if n<2 then
+        return n
+    else
+    return run(n-1)+run(n-2)
+    end
+end
+
+function tick()
+    local t1 = os.time()
+    run(40)
+    local t2 = os.time()
+    skynet.logError('cost time: %d', (t2-t1))
+end
+
 function create(harbor, hid, args)
     skynet.setHandle(hid)
     skynet.logNotice("[manager]Manager create.")
+    skynet.setTimer(1000)
     return 0
 end
 
@@ -56,6 +72,9 @@ end
 function handle(hid, source, session, type, msg)
     if (type == skynet.SERVICE_TEXT) then
     	dispatch_text(source, session, msg)
+    elseif (type == skynet.SERVICE_TIMER) then
+        tick()
+        skynet.setTimer(1000)
     else
     	skynet.logError("[manager]handle error message. type=%d source=%d", type, source)
     end

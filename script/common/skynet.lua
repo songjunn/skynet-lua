@@ -76,6 +76,12 @@ function skynet.queryDb(session, dbname, tablename, query, opts)
 	skynet_send_string("database", handle, session, skynet.SERVICE_TEXT, message, #message)
 end
 
+function skynet.insertDb(dbname, tablename, value)
+	local data = {"insert|", dbname, "|", tablename, "|", value}
+	local message = table.concat(data)
+	skynet_send_string("database", handle, 0, skynet.SERVICE_TEXT, message, #message)
+end
+
 function skynet.upsertDb(dbname, tablename, query, value)
 	local data = {"upsert|", dbname, "|", tablename, "|", query, "|", value}
 	local message = table.concat(data)
